@@ -4,7 +4,7 @@ var ml = require('machine_learning');
 const TrainingEpochs = 1000, alpha = 0.01;
 
 class LogisticRegression {
-   
+
    constructor(learingData) {
     let data  = LogisticRegression.generateLearningArray(learingData);
     console.log(data);
@@ -54,7 +54,7 @@ class LogisticRegression {
 }
 
 class FlightLearningData {
-  
+
 
   constructor(d, p, s, fb, o) {
     this.duration = d;
@@ -63,11 +63,11 @@ class FlightLearningData {
     this.freeBaggage = fb;
     this.output = o;
  }
- 
+
 
 
   static scale(data, maxMin) {
-    
+
     let durationScalingData = -1;
     let newDataSet = [];
     data.forEach((sample) => {
@@ -87,7 +87,7 @@ class FlightLearningData {
     let prices = [];
     let stops = [];
     let freeBaggages = [];
-    
+
     data.forEach((sample) => {
         console.log(sample);
         durations.push(sample.duration);
@@ -105,12 +105,12 @@ class FlightLearningData {
         prices: {
            max: Math.max.apply(null, prices),
            min: Math.min.apply(null, prices),
-           average: FlightLearningData.calculateAverage(prices) 
+           average: FlightLearningData.calculateAverage(prices)
         } ,
         stops: {
            max: Math.max.apply(null, stops),
            min: Math.min.apply(null, stops),
-           average: FlightLearningData.calculateAverage(stops) 
+           average: FlightLearningData.calculateAverage(stops)
         } ,
         freeBaggages: {
            max: Math.max.apply(null, freeBaggages),
@@ -123,13 +123,13 @@ class FlightLearningData {
   static calculateAverage(numberArray) {
     let total = 0;
     numberArray.forEach(function (grade) {
-        total += grade        
+        total += grade
     });
     return total / numberArray.length;
   }
 }
 
-// Sample data for TXL-MUC. first is duration in minutes, second, price, thirds stops, 4th has baggage
+// Sample data for TXL-MUC. first is duration in minutes, second, price, 3rd is stops, 4th has baggage
 let f1 = new FlightLearningData(60, 100, 0, 1, [1,0]);
 let f2 = new FlightLearningData(90, 80, 0, 1, [1,0]);
 let f3 = new FlightLearningData(48, 110, 0, 1, [1,0]);
@@ -146,13 +146,9 @@ let scaledData = FlightLearningData.scale(trainingData, maxMin);
 let lg = new LogisticRegression(scaledData);
 lg.train();
 
-let newD = new FlightLearningData(40, 70, 0, 1);
+let newD = new FlightLearningData(100, 90, 0, 1);
 let newMaxMin = FlightLearningData.getFeaturesMaxMin([newD].concat(trainingData));
 
 let testData = FlightLearningData.scale([newD], newMaxMin);
 
 console.log(lg.predict(testData));
-
-
-
-

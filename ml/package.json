@@ -1,9 +1,10 @@
 {
   "name": "ml-experiments",
   "version": "0.0.1",
-  
+
   "description": "playing around machine learning algoritmhs",
   "dependencies": {
-    "machine_learning": "0.0.8"
+    "machine_learning": "0.0.8",
+    "synaptic": "1.0.8"
    }
 }
